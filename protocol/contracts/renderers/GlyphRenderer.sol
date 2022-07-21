@@ -73,62 +73,65 @@ contract GlyphRenderer is IRenderer, Ownable, ERC165 {
   // The following code generates art.
 
   function draw(bytes calldata props) public pure returns (bytes memory) {
-      uint a = uint(keccak256(abi.encodePacked(props)));
+    //   uint a = uint(keccak256(abi.encodePacked(props)));
       bytes memory output = new bytes(USIZE * (USIZE));
       uint c;
-      int x = 0;
-      int y = 0;
-      uint v = 0;
-      uint value = 0;
-      uint mod = (a % 11) + 5;
-      bytes5 symbols;
-      uint idToSymbolScheme = 7; // getScheme(a);
-      if (idToSymbolScheme == 0) {
-          revert();
-      } else if (idToSymbolScheme == 1) {
-          symbols = 0x2E582F5C2E; // X/\
-      } else if (idToSymbolScheme == 2) {
-          symbols = 0x2E2B2D7C2E; // +-|
-      } else if (idToSymbolScheme == 3) {
-          symbols = 0x2E2F5C2E2E; // /\
-      } else if (idToSymbolScheme == 4) {
-          symbols = 0x2E5C7C2D2F; // \|-/
-      } else if (idToSymbolScheme == 5) {
-          symbols = 0x2E4F7C2D2E; // O|-
-      } else if (idToSymbolScheme == 6) {
-          symbols = 0x2E5C5C2E2E; // \
-      } else if (idToSymbolScheme == 7) {
-          symbols = 0x2E237C2D2B; // #|-+
-      } else if (idToSymbolScheme == 8) {
-          symbols = 0x2E4F4F2E2E; // OO
-      } else if (idToSymbolScheme == 9) {
-          symbols = 0x2E232E2E2E; // #
-      } else {
-          symbols = 0x2E234F2E2E; // #O
-      }
-      for (int i = int(0); i < SIZE; i++) {
-          y = (2 * (i - HALF_SIZE) + 1);
-          if (a % 3 == 1) {
-              y = -y;
-          } else if (a % 3 == 2) {
-              y = abs(y);
-          }
-          y = y * int(a);
-          for (int j = int(0); j < SIZE; j++) {
-              x = (2 * (j - HALF_SIZE) + 1);
-              if (a % 2 == 1) {
-                  x = abs(x);
-              }
-              x = x * int(a);
-              v = uint(x * y / ONE) % mod;
-              if (v < 5) {
-                  value = uint8(bytes1(symbols[v]));
-              } else {
-                  value = 0x2E;
-              }
-              output[c] = bytes1(bytes32(value << 248));
-              c++;
-          }
+    //   int x = 0;
+    //   int y = 0;
+    //   uint v = 0;
+    //   uint value = 0;
+    //   uint mod = (a % 11) + 5;
+    //   bytes5 symbols;
+    //   uint idToSymbolScheme = 7; // getScheme(a);
+    //   if (idToSymbolScheme == 0) {
+    //       revert();
+    //   } else if (idToSymbolScheme == 1) {
+    //       symbols = 0x2E582F5C2E; // X/\
+    //   } else if (idToSymbolScheme == 2) {
+    //       symbols = 0x2E2B2D7C2E; // +-|
+    //   } else if (idToSymbolScheme == 3) {
+    //       symbols = 0x2E2F5C2E2E; // /\
+    //   } else if (idToSymbolScheme == 4) {
+    //       symbols = 0x2E5C7C2D2F; // \|-/
+    //   } else if (idToSymbolScheme == 5) {
+    //       symbols = 0x2E4F7C2D2E; // O|-
+    //   } else if (idToSymbolScheme == 6) {
+    //       symbols = 0x2E5C5C2E2E; // \
+    //   } else if (idToSymbolScheme == 7) {
+    //       symbols = 0x2E237C2D2B; // #|-+
+    //   } else if (idToSymbolScheme == 8) {
+    //       symbols = 0x2E4F4F2E2E; // OO
+    //   } else if (idToSymbolScheme == 9) {
+    //       symbols = 0x2E232E2E2E; // #
+    //   } else {
+    //       symbols = 0x2E234F2E2E; // #O
+    //   }
+    //   for (int i = int(0); i < 12; i++) {
+        //   y = (2 * (i - HALF_SIZE) + 1);
+        //   if (a % 3 == 1) {
+        //       y = -y;
+        //   } else if (a % 3 == 2) {
+        //       y = abs(y);
+        //   }
+        //   y = y * int(a);
+        //   for (int j = int(0); j < 12; j++) {
+        //       x = (2 * (j - HALF_SIZE) + 1);
+        //       if (a % 2 == 1) {
+        //           x = abs(x);
+        //       }
+        //       x = x * int(a);
+        //       v = uint(x * y / ONE) % mod;
+        //       if (v < 5) {
+        //           value = uint8(bytes1(symbols[v]));
+        //       } else {
+        //           value = 0x2E;
+        //       }
+        //       output[c] = bytes1(bytes32(value << 248));
+        for (uint i = 0; i < USIZE; i++) {
+            for (uint j = 0; j < USIZE; j++) {
+                output[c] = bytes1(0x23);
+                c++;
+            }
       }
       return output;
   }
